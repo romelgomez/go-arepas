@@ -1,4 +1,7 @@
-# Golang Prisma Postgresql Railway
+# Go Arepas 🫓 
+
+Golang Prisma Postgresql Railway
+
 
 ## Models
 
