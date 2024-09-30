@@ -26,7 +26,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@d60b41a563a30eac31c3ec623e6ff0b3f16e1a06
         with:
-          go-version: 1.23.0
+          go-version: 1.23
 
       - name: Download Required Dependencies
         run: go mod download
