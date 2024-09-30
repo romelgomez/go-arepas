@@ -1,4 +1,7 @@
-# Golang Prisma Postgresql Railway
+# Go Arepas 🫓 
+
+Golang Prisma Postgresql Railway
+
 
 ## Models
 
@@ -71,7 +74,7 @@ go run github.com/steebchen/prisma-client-go migrate dev
 │   │   └── service
 │   │       ├── account_service.go
 │   │       └── account_service_impl.go
-│   ├── post
+│   └── post
 │   │   ├── controller
 │   │   │   └── post_controller.go
 │   │   ├── dto
@@ -86,36 +89,6 @@ go run github.com/steebchen/prisma-client-go migrate dev
 │   │   └── service
 │   │       ├── post_service.go
 │   │       └── post_service_impl.go
-│   ├── user
-│   │   ├── controller
-│   │   │   └── user_controller.go
-│   │   ├── dto
-│   │   │   ├── user_create.go
-│   │   │   ├── user_response.go
-│   │   │   └── user_update.go
-│   │   ├── model
-│   │   │   └── user.go
-│   │   ├── repository
-│   │   │   ├── user_repository.go
-│   │   │   └── user_repository_impl.go
-│   │   └── service
-│   │       ├── user_service.go
-│   │       └── user_service_impl.go
-│   └── user_media
-│       ├── controller
-│       │   └── user_media_controller.go
-│       ├── dto
-│       │   ├── user_media_create.go
-│       │   ├── user_media_response.go
-│       │   └── user_media_update.go
-│       ├── model
-│       │   └── user_media.go
-│       ├── repository
-│       │   ├── user_media_repository.go
-│       │   └── user_media_repository_impl.go
-│       └── service
-│           ├── user_media_service.go
-│           └── user_media_service_impl.go
 ├── go-arepas
 ├── go.mod
 ├── go.sum
