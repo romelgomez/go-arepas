@@ -10,6 +10,9 @@ RUN go mod download
 # Copy the rest of the application files
 COPY . .
 
+# Download Prisma client dependencies
+RUN go run github.com/steebchen/prisma-client-go generate
+
 # Build the application
 RUN go build -o main .
 
