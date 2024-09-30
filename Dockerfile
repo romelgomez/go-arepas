@@ -17,7 +17,7 @@ RUN go run github.com/steebchen/prisma-client-go generate
 RUN go build -o main .
 
 # Stage 2: Create the final runtime image
-FROM debian:bullseye-slim
+FROM golang:1.23 AS runtime
 
 WORKDIR /app
 
