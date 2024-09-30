@@ -1,19 +1,17 @@
-name: Go
+name: Prisma Migrations
 
 on:
+  workflow_dispatch: # Allows manually triggering migrations from the GitHub Actions UI
   push:
     branches:
       - main
-    paths-ignore:
-      - "**/README.md"
-  pull_request:
-    branches:
-      - main
+    paths:
+      - "prisma/**" # Only trigger on changes to Prisma files or schema
 
 permissions: read-all
 
 jobs:
-  build:
+  migrate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -26,14 +24,10 @@ jobs:
       - name: Download Required Dependencies
         run: go mod download
 
-      - name: Add Prisma Client Go Dependency
-        run: go get github.com/steebchen/prisma-client-go@latest
-
       - name: Generate Prisma Client
         run: go run github.com/steebchen/prisma-client-go generate
 
-      - name: Build
-        run: go build -v ./...
-
-      - name: Test
-        run: go test -v ./...
+      - name: Run Prisma Migrations
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: go run github.com/steebchen/prisma-client-go migrate deploy
