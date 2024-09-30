@@ -10,14 +10,14 @@ RUN go mod download
 # Copy the rest of the application files
 COPY . .
 
-# Download Prisma client dependencies
+# Generate Prisma client
 RUN go run github.com/steebchen/prisma-client-go generate
 
 # Build the application
-RUN go build -o main .
+RUN CGO_ENABLED=0 GOOS=linux go build -o main .
 
 # Stage 2: Create the final runtime image
-FROM golang:1.23 AS runtime
+FROM alpine:latest AS runtime
 
 WORKDIR /app
 
@@ -25,7 +25,10 @@ WORKDIR /app
 COPY --from=builder /app/main .
 
 # Copy the .env file
-COPY .env .env
+COPY --from=builder /app/.env.example .env
+
+# Install any other runtime dependencies if needed
+# e.g., RUN apk add --no-cache ca-certificates
 
 # Expose the port your application listens on
 EXPOSE 8080
