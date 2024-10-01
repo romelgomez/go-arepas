@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
+	"go-arepas/auth"
 	"go-arepas/config"
 	"go-arepas/helper"
+	"go-arepas/middleware"
 	"go-arepas/router"
 
 	// repositories
@@ -38,6 +40,11 @@ func main() {
 		port = "8080" // Default to port 8080 if not specified
 	}
 
+	issuerURL := os.Getenv("CLERK_ISSUER_URL")
+	jwksURL := fmt.Sprintf("%s/.well-known/jwks.json", issuerURL)
+	jwtStrategy := auth.NewJWTStrategy(issuerURL, jwksURL, "RS256")
+	jwtMiddleware := middleware.NewJWTMiddleware(jwtStrategy)
+
 	db, err := config.ConnectDB()
 	helper.ErrorPanic(err)
 
@@ -54,6 +61,7 @@ func main() {
 
 	// router
 	routes := router.NewRouter(
+		jwtMiddleware,
 		postController,
 	)
 
