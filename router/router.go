@@ -3,6 +3,7 @@ package router
 import (
 	"fmt"
 	v1 "go-arepas/api/v1"
+	"go-arepas/middleware"
 
 	post_controller "go-arepas/domain/post/controller"
 	"net/http"
@@ -11,6 +12,7 @@ import (
 )
 
 func NewRouter(
+	jwtMiddleware *middleware.JWTMiddleware,
 	postController *post_controller.PostController,
 ) *httprouter.Router {
 	router := httprouter.New()
@@ -21,7 +23,8 @@ func NewRouter(
 	})
 
 	// Register v1 routes
-	v1.NewPostRoutes(router, postController)
+	v1.NewPostRoutes(router, postController, jwtMiddleware)
+
 
 	// Register v2 routes (if needed)
 	// v2.NewAccountRoutes(router, accountController)

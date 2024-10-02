@@ -120,3 +120,11 @@ In production, you would set the CORS_ALLOWED_ORIGINS to your actual domain(s):
 ```bash
 CORS_ALLOWED_ORIGINS=https://your-astro-client.com,https://your-android-client.com,https://your-ios-client.com
 ```
+
+## Testing With Postman
+
+https://clerk.com/docs/testing/postman-or-insomnia
+
+```javascript
+await window.Clerk.session.getToken({ template: "testing-template" });
+```
