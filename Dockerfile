@@ -30,5 +30,8 @@ COPY --from=builder /app/.env.example .env
 # Expose the port your application listens on
 EXPOSE 8080
 
+# Run Prisma migrations before starting the application
+RUN go run github.com/steebchen/prisma-client-go migrate deploy
+
 # Start the application
 CMD ["./main"]
