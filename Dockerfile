@@ -13,9 +13,6 @@ COPY . .
 # Download Prisma client dependencies
 RUN go run github.com/steebchen/prisma-client-go generate
 
-# Run Prisma Migrations
-RUN go run github.com/steebchen/prisma-client-go migrate deploy
-
 # Build the application
 RUN go build -o main .
 
